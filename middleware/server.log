@@ -1,0 +1,5 @@
+[ '/Users/lars/.node_modules',
+  '/Users/lars/.node_libraries',
+  '/usr/local/Cellar/node/0.4.8/lib/node' ]
+[36m > api server started on port 8000[39m
+   [36minfo  -[39m socket.io started
