@@ -1,8 +1,0 @@
-{
-  "name":"middleware",
-  "version":"0.0.1",
-  "dependencies":{
-    "webservice":"0.5.1",
-    "vows":"0.5.8"
-  }
-}
