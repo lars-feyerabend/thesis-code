@@ -1,0 +1,1275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <title>DYNEXITE</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="DYNEXITE"/>
+
+    <link rel="stylesheet" type="text/css" href="css/student.css"/>
+
+		<link rel="stylesheet" type="text/css" href="css/accordian.css"/>
+
+		<link rel="stylesheet" href="admin/data/aufgaben/rewe/html/custom.css" type="text/css"/>
+
+	 <script type="text/javascript" src="css/accordian.pack.js"></script>
+
+	 <script type="text/javascript" src="templates/mootools.js"></script>
+
+	 <script type="text/javascript" src="includes/raphael-min.js"></script>
+
+	 <script type="text/javascript" src="includes/gauge/gauge.js"></script>
+
+
+
+
+	</head>
+
+	<body>
+
+	<script type="text/javascript">
+
+	function addNewSource (caller)
+
+	{
+
+	  var tbl = caller.parentNode.parentNode.parentNode;
+
+
+
+	  var lastRow 	= tbl.rows.length-1;
+
+	  var iteration = lastRow;
+
+	  var row 			= tbl.insertRow(lastRow);
+
+
+
+		var varnode = tbl.parentNode.parentNode.parentNode.parentNode.parentNode
+
+		var varname = varnode.id;
+
+
+
+		var busatz_nr = caller.parentNode.parentNode.parentNode.firstChild.firstChild.firstChild;
+
+
+
+		var attribute = busatz_nr.name;
+
+		var start = attribute.indexOf('[')+1;
+
+		var end = attribute.indexOf(']');
+
+		var value = attribute.substring(start,end);
+
+
+
+		var cell1 	= row.insertCell(0);
+
+		var node	= document.createElement('select');
+
+		node.name	= varname+'['+value+'][0]['+iteration+'][0]';
+
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		cell1.appendChild(node);
+
+
+		var cell2 = row.insertCell(1);
+		var node 	= document.createElement('input');
+		node.type = 'text';
+		node.name = varname+'['+value+'][0]['+iteration+'][1]';
+		cell2.appendChild(node);
+
+
+
+		var value = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+		var sourcelink1 = document.getElementById(varname+'_'+value+'-targetclear');
+		var sourcelink2 = document.getElementById(varname+'_'+value+'-targetadd');
+
+		sourcelink1.style.visibility='hidden';
+		sourcelink2.style.visibility='hidden';
+
+	}
+
+	function addNewTarget(caller)
+	{
+		var tbl = caller.parentNode.parentNode.parentNode;
+		var lastRow 	= tbl.rows.length-1;
+		var iteration = lastRow;	
+		var row 			= tbl.insertRow(lastRow);
+		var varnode = tbl.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode
+		var varname = varnode.id;
+
+		var busatz_nr = caller.parentNode.parentNode.parentNode.firstChild.firstChild.firstChild;
+
+		var attribute = busatz_nr.name;
+		var start = attribute.indexOf('[')+1;
+		var end = attribute.indexOf(']');
+
+		var value = attribute.substring(start,end);
+		var cell1 	= row.insertCell(0);
+		var node	= document.createElement('select');
+		node.name	= varname+'['+value+'][1]['+iteration+'][0]';
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		node.options[0] = new Option('Bitte auswählen...', '0');
+		node.options[1] = new Option('Abnutzbare Sachanlagen', 'abnutzbaresachanlagen');
+		node.options[2] = new Option('Aufwand (Personal)', 'aufwandpersonal');
+		node.options[3] = new Option('Aufwand (Sonstiges)', 'aufwandsonst');
+		node.options[4] = new Option('Aufwand (Verkauf)', 'aufwandumsatz');
+		node.options[5] = new Option('Aufwand (Zins)', 'aufwandzins');
+		node.options[6] = new Option('Entnahme', 'eigenkapitalentnahme');
+		node.options[7] = new Option('Ertrag (Verkauf)', 'ertragumsatz');
+		node.options[8] = new Option('Forderung (Verkauf)', 'fordverkauf');
+		node.options[9] = new Option('Handelsware', 'handelsware');
+		node.options[10] = new Option('Nicht abnutzbare Sachanlagen', 'nichtabnutzbaresachanlagen');
+		node.options[11] = new Option('Verbindlichkeiten (Bank)', 'verbindlichkeitenbank');
+		node.options[12] = new Option('Verbindlichkeiten (Einkauf)', 'verbindlichkeiteneinkauf');
+		node.options[13] = new Option('Verbindlichkeiten (Sonstiges)', 'verbindlichkeitensonst');
+		node.options[14] = new Option('Zahlungsmittel', 'zahlungsmittel');
+		cell1.appendChild(node);
+
+
+		var cell2 = row.insertCell(1);
+		var node 	= document.createElement('input');
+		node.type = 'text';
+		node.name = varname+'['+value+'][1]['+iteration+'][1]';
+		cell2.appendChild(node);
+
+
+
+		var value = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+		var sourcelink1 = document.getElementById(varname+'_'+value+'-sourceclear');
+
+		var sourcelink2 = document.getElementById(varname+'_'+value+'-sourceadd');
+
+		sourcelink1.style.visibility='hidden';
+
+		sourcelink2.style.visibility='hidden';
+
+
+
+
+
+	}
+
+
+
+	function removeTarget(caller)
+
+	{
+
+	  var tbl = caller.parentNode.parentNode.parentNode;
+
+	  var lastRow 	= tbl.rows.length-2;
+
+	  var iteration = lastRow;
+
+	  if (lastRow > 0)  var row = tbl.deleteRow(lastRow);
+
+	  if (lastRow < 2) {
+
+	  	var varname = caller.id.substring(0, caller.id.indexOf('_'));
+
+		var value = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+
+
+		var sourcelink1 = document.getElementById(varname+'_'+value+'-sourceclear');
+
+		var sourcelink2 = document.getElementById(varname+'_'+value+'-sourceadd');
+
+		sourcelink1.style.visibility='visible';
+
+		sourcelink2.style.visibility='visible';
+
+		}
+
+	}
+
+
+
+	function removeSource(caller)
+
+	{
+
+	  var tbl = caller.parentNode.parentNode.parentNode;
+
+	  var lastRow 	= tbl.rows.length-2;
+
+	  var iteration = lastRow;
+
+	  if (lastRow > 0)  var row = tbl.deleteRow(lastRow);
+
+	  if (lastRow < 2) {
+
+	  	var varname = caller.id.substring(0, caller.id.indexOf('_'));
+
+		var value = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+
+
+		var targetlink1 = document.getElementById(varname+'_'+value+'-targetclear');
+
+		var targetlink2 = document.getElementById(varname+'_'+value+'-targetadd');
+
+		targetlink1.style.visibility='visible';
+
+		targetlink2.style.visibility='visible';
+
+		}
+
+	}
+
+
+
+
+
+	function addNewBusatz(caller)
+
+	{
+
+		var tbl = caller.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+	  	var varname = tbl.parentNode.id;
+
+	 	var element = tbl.firstChild.firstChild.firstChild.firstChild.firstChild.cloneNode(true);
+
+    	var  clonetable = (element.firstChild.firstChild);
+
+	 	var busatz_counter = document.getElementById(varname).firstChild.firstChild.firstChild.firstChild.firstChild.rows.length;
+
+
+
+		replaceAttributes(clonetable, busatz_counter);
+
+		tbl.firstChild.firstChild.firstChild.firstChild.appendChild( element );
+
+	}
+
+
+
+	function removeBusatz(caller)
+
+	{
+
+	  var tbl = caller.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+
+	  var lastRow 	= tbl.firstChild.firstChild.firstChild.firstChild.rows.length-2;
+
+	  if (lastRow > -1) var row = tbl.firstChild.firstChild.firstChild.firstChild.deleteRow(lastRow);
+
+	}
+
+
+
+	function countTags(n)
+
+	{
+
+		var numtags = 0;
+
+		if (n.nodeType == 1 /*Node.ELEMENT_NODE*/)
+
+		var children = n.childNodes;
+
+		return children.length;
+
+	}
+
+	function replaceAttributes(relnode, value)
+
+	{
+
+		if (relnode.nodeType == 1 /*Node.ELEMENT_NODE*/) {
+
+			var children = relnode.getElementsByTagName('select');
+
+			for (var i=0; i < children.length; i++)
+
+			{
+
+				children[i].name = buildString(children[i].name, value)
+
+			}
+
+			var children = relnode.getElementsByTagName('input');
+
+			for (var i=0; i < children.length; i++)
+
+			{
+
+				children[i].name = buildString(children[i].name, value)
+
+			}
+
+			var children = relnode.getElementsByTagName('a');
+
+			for (var i=0; i < children.length; i++)
+
+			{
+
+				var ident = children[i].id;
+
+				children[i].id = ident.substring(0, ident.indexOf('_')+1)+value+ident.substring(ident.indexOf('-'),ident.length);
+
+			}
+
+		}
+
+	}
+
+	function buildString (attribute, value)
+
+	{
+
+			var marker = attribute.indexOf('[');
+
+			var start = attribute.substring(0,marker+1);
+
+			var end = attribute.substring(attribute.indexOf(']'),attribute.length);
+
+			attribute = start+value+end;
+
+
+
+			return attribute;
+
+	}
+
+	</script>	<script type="text/javascript">
+
+				function addNewRank_(caller)
+
+		{
+
+		  if (caller.name == 'ranking_x') {
+
+			var varname = caller.id.substring(0, caller.id.indexOf('_'));
+
+			var iteration = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+			var node	= document.createElement('select');
+
+			node.style.width = "px";
+
+			var ranking =  'main_'+varname+'_'+iteration;
+
+			var rankNode = document.getElementById(ranking);
+
+			var	node_iteration = (rankNode.childNodes.length-1)/2+1;
+
+			node.name	= varname+'['+node_iteration+']';
+
+			node.options[0] = new Option('-', '0');
+
+									var seperator = document.createTextNode(', ');
+
+			document.getElementById(ranking).appendChild(seperator);
+
+			document.getElementById(ranking).appendChild(node);
+
+			document.getElementById(varname+'_'+iteration+'-sourceclear').style.visibility='visible';
+
+
+
+		  }
+
+		  else {
+
+				var tbl = caller.parentNode.parentNode.parentNode;
+
+
+
+				var lastRow 	= tbl.rows.length-1;
+
+				var iteration = lastRow;
+
+				var row 			= tbl.insertRow(lastRow);
+
+
+
+				var varnode = tbl.parentNode.parentNode.parentNode.parentNode.parentNode
+
+				var varname = varnode.id;
+
+
+
+				var rank_nr = caller.parentNode.parentNode.parentNode.firstChild.firstChild.firstChild;
+
+
+
+				var attribute = rank_nr.name;
+
+				var start = attribute.indexOf('[')+1;
+
+				var end = attribute.indexOf(']');
+
+				var value = attribute.substring(start,end);
+
+
+
+				var cell1 	= row.insertCell(0);
+
+				var node	= document.createElement('select');
+
+				node.style.width = "px";
+
+				node.name	= varname+'['+iteration+']';
+
+				node.options[0] = new Option('-', '0');
+
+								cell1.appendChild(node);
+
+
+
+				var value = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+				var sourcelink1 = document.getElementById(varname+'_'+value+'-sourceclear');
+
+
+
+				sourcelink1.style.visibility='visible';
+
+				}
+
+		}
+
+
+
+
+
+		function removeRank_(caller)
+
+		{
+
+			if (caller.name == 'ranking_x') {
+
+				var varname = caller.id.substring(0, caller.id.indexOf('_'));
+
+				var iteration = caller.id.substring(caller.id.indexOf('_')+1, caller.id.indexOf('-'));
+
+				var ranking =  'main_'+varname+'_'+iteration;
+
+				var rankNode = document.getElementById(ranking);
+
+				var rankNodeCount = (rankNode.childNodes.length-1)/2;
+
+				if (rankNodeCount > 0) {
+
+					rankNode.removeChild(rankNode.lastChild);
+
+					rankNode.removeChild(rankNode.lastChild);
+
+				}
+
+				if (rankNodeCount < 2)	{
+
+					caller.style.visibility='hidden';
+
+				}
+
+			}
+
+			else
+
+			{
+
+			  var tbl = caller.parentNode.parentNode.parentNode;
+
+			  var lastRow 	= tbl.rows.length-2;
+
+			  var iteration = lastRow;
+
+			  if (lastRow > 0)  var row = tbl.deleteRow(lastRow);
+
+			  if (lastRow < 2) {
+
+			  	caller.style.visibility='hidden';
+
+				}
+
+			}
+
+		}
+
+		</script>
+
+	<br/>
+
+
+
+	<input type="hidden" id="session_id" value="b2a6c51f4c6094327eb3044b84522491"/>
+
+	<div>
+		
+
+<table class="selector_collection" style="border-top: 0px;">
+
+		<tr>
+
+			<td id="content"><p><b>Buchführung und Finanzberichte, Kapitel 4, Aufgabe 3</b></p>
+
+<p>Verbuchung von Ereignissen unter Berücksichtigung des Zuordnungsprinzips</p>
+
+
+
+<p><b>Sachverhalt</b></p>
+
+<p>In einem Unternehmen werden Fußbälle hergestellt. Der Herstellungsprozess läuft wie
+folgt ab: Lederstücke werden mit Garn derart maschinell aneinander genäht, dass sich
+eine Lederkugel ergibt. Damit man in diese Kugel Luft hineinpumpen kann und die
+Luft auch in der Lederkugel verbleibt, wird in die Lederkugel eine Gummiblase eingebracht, welche die Luft aufnimmt und speichert. Im Laufe des Geschäftjahres 20X1,
+in dem das Unternehmen 10000 Fußbälle hergestellt hat, fanden folgende Ereignisse
+statt:</p>
+
+<br>
+
+
+<ol type="a">
+
+<li>Es wurde Leder eingekauft und für die Herstellung verbraucht. Die Rechnung
+belief sich auf 36.000 GE und wurde bar bezahlt.</li>
+
+<li>Es wurde Garn eingekauft und für die Herstellung verbraucht. Die Rechnung
+belief sich auf 8.000 GE. Der Betrag wurde mit bestehenden Forderungen des
+Unternehmens gegenüber dem Lieferanten verrechnet.</li>
+
+<li>Es wurden Gummiblasen eingekauft und für die Herstellung verbraucht. Die
+Rechnung belief sich auf 13.000 GE und es wurde ein Zahlungsziel im Geschäftsjahr 20X2 vereinbart, das von dem Unternehmen auch eingehalten werden wird.</li>
+
+<li>Es fielen Arbeitslöhne in Höhe von 22.000 GE an, die bereits ausgezahlt wurden.
+Die Arbeitslöhne stehen direkt mit der Fußballfertigung in Verbindung.</li>
+
+<li>Die Stromrechnung für die Beheizung der Fertigungshallen über 26.000 GE ist
+eingegangen und wird im Geschäftsjahr 20X2 bezahlt werden.</li>
+
+<li>Es wurde ein Kredit zur Überbrückung eines finanziellen Engpasses aufgenommen. Dem Unternehmen wurden 250.000 GE ausgezahlt. Der Rückzahlungsbetrag wurde auf 270.000 GE festgelegt. Während der zweijährigen Kreditlaufzeit
+entrichtet das Unternehmen jeweils 5% Zinsen auf den Rückzahlungsbetrag an
+die Bank in bar.</li>
+
+<li>Das Gehalt des Leiters der Vertriebsabteilung für 20X1 in Höhe von insgesamt
+38.000 GE wurde auf dessen privates Bankkonto überwiesen.</li>
+<li>Es werden 60% der hergestellten Erzeugnisse am Ende des Geschäftsjahres zum Preis von 100.000 GE gegen Barzahlung verkauft.</li>
+
+</ol>
+
+</p>
+
+
+
+
+
+
+
+<p><b>Aufgabe</b></p>
+
+<p>
+
+Bilden Sie die oben angegebenen Ereignisse des Geschäftsjahres 20X1 durch
+Buchungssätze ab! Nehmen Sie an, das Unternehmen verwende ein Finalprinzip
+zur Ermittlung der Herstellungsausgaben der Fußbälle!
+
+</p></td>
+
+		</tr>
+
+	</table><p>
+
+	<table class="selector_collection">
+
+		<tr><th style="padding-top: 0px;padding-bottom: 0px;">
+
+				<table><tr>
+
+								<td><img alt="enter" src="icons/block_edit.png"/></td>
+
+								<td>Lösungseingabe</td>
+
+							</tr>
+
+				</table>
+
+			</th>
+
+		</tr>
+
+	</table>
+
+	<table class="selector_collection">
+
+		<tr>
+
+			<td>
+
+			<form action="studentIndex.php" method="post" id="student_form">
+
+				&nbsp;<p><b>Aufgabe</b></p>
+
+Bilden Sie die oben angegebenen Ereignisse des Geschäftsjahres 20X1 durch
+
+Buchungssätze ab! Nehmen Sie an, das Unternehmen verwende ein Finalprinzip
+
+zur Ermittlung der Herstellungsausgaben der Fußbälle!<br>
+
+<br>
+
+
+
+<p><b>Bearbeitungshinweise:</b></p>
+
+Bei der Bearbeitung der vorliegenden Aufgabe (insbesondere bei der Lösungseingabe) beachten Sie bitte folgende Punkte:
+
+<br>
+
+<ul>
+
+<li>Geben Sie bei Geschäftsvorfällen, aus denen zeitgleich eine Ertrags- und Aufwandswirkung resultiert, die Ertrags- und Aufwandsbuchung in getrennten Buchungssätzen an!</li>
+
+<li>Vermerken Sie in den Eingabefeldern nur Zahlenwerte ohne weitere Zusätze, wie bspw. "GE".</li>
+
+<li>Verzichten Sie unbedingt auf die Eingabe von Dezimalpunkten (bspw. 1000er-Punkt)!</li>
+
+<li>Sofern Sie negative Zahlen eingeben müssen, versehen Sie die Zahl bitte mit einem Minuszeichen. Vermeiden Sie hingegen bei der Eingabe von positiven Werten die Eingabe eines Pluszeichens vor dem entsprechenden Zahlenwert!</li>
+
+<li>Felder, die Sie bewusst leer lassen wollen, kennzeichnen Sie bitte durch die Eingabe einer "0"! Somit ist es möglich, ein bewusstes Leerlassen (was an manchen Stellen durchaus die richtige Lösung sein kann!) von einem unbewussten Leerlassen zu unterscheiden.</li>
+
+</ul>
+
+<br><br>
+
+
+
+<hr>
+
+<table width="100%">
+
+<tr><td>Bitte geben Sie Ihre Ergebnisse ein:<br><br></td></tr>
+
+
+
+<tr><td>Sachverhalt a.	</td></tr>
+
+<tr><td>Es wurde Leder eingekauft und für die Herstellung verbraucht. Die Rechnung
+
+belief sich auf 36.000 GE und wurde bar bezahlt.</td></tr>
+
+<tr><td><table id="main_sachverhaltA"><tr><td><table><tr><td><table id="sachverhaltA">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltA_source[0]"><tr><td><select name="sachverhaltA[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltA[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltA_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltA_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltA_target[0]"><tr><td><select name="sachverhaltA[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltA[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltA_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltA_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt b.	</td></tr>
+
+<tr><td>Es wurde Garn eingekauft und für die Herstellung verbraucht. Die Rechnung
+
+belief sich auf 8.000 GE. Der Betrag wurde mit bestehenden Forderungen des
+
+Unternehmens gegenüber dem Lieferanten verrechnet.</td></tr>
+
+<tr><td><table id="main_sachverhaltB"><tr><td><table><tr><td><table id="sachverhaltB">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltB_source[0]"><tr><td><select name="sachverhaltB[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltB[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltB_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltB_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltB_target[0]"><tr><td><select name="sachverhaltB[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltB[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltB_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltB_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt c.	</td></tr>
+
+<tr><td>Es wurden Gummiblasen eingekauft und für die Herstellung verbraucht. Die
+
+Rechnung belief sich auf 13.000 GE und es wurde ein Zahlungsziel im Geschäftsjahr 20X2 vereinbart, das von dem Unternehmen auch eingehalten werden wird.</td></tr>
+
+<tr><td><table id="main_sachverhaltC"><tr><td><table><tr><td><table id="sachverhaltC">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltC_source[0]"><tr><td><select name="sachverhaltC[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltC[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltC_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltC_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltC_target[0]"><tr><td><select name="sachverhaltC[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltC[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltC_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltC_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt d.	</td></tr>
+
+<tr><td>Es fielen Arbeitslöhne in Höhe von 22.000 GE an, die bereits ausgezahlt wurden.
+
+Die Arbeitslöhne stehen direkt mit der Fußballfertigung in Verbindung.</td></tr>
+
+<tr><td><table id="main_sachverhaltD"><tr><td><table><tr><td><table id="sachverhaltD">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltD_source[0]"><tr><td><select name="sachverhaltD[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltD[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltD_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltD_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltD_target[0]"><tr><td><select name="sachverhaltD[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltD[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltD_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltD_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt e.	</td></tr>
+
+<tr><td>Die Stromrechnung für die Beheizung der Fertigungshallen über 26.000 GE ist
+
+eingegangen und wird im Geschäftsjahr 20X2 bezahlt werden.</td></tr>
+
+<tr><td><table id="main_sachverhaltE"><tr><td><table><tr><td><table id="sachverhaltE">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltE_source[0]"><tr><td><select name="sachverhaltE[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltE[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltE_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltE_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltE_target[0]"><tr><td><select name="sachverhaltE[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltE[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltE_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltE_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt f.	</td></tr>
+
+<tr><td>Es wurde ein Kredit zur Überbrückung eines finanziellen Engpasses aufgenommen. Dem Unternehmen wurden 250.000 GE ausgezahlt. Der Rückzahlungsbetrag wurde auf 270.000 GE festgelegt. Während der zweijährigen Kreditlaufzeit
+
+entrichtet das Unternehmen jeweils 5% Zinsen auf den Rückzahlungsbetrag an
+
+die Bank in bar.</td></tr>
+
+<tr><td><table id="main_sachverhaltF"><tr><td><table><tr><td><table id="sachverhaltF">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltF_source[0]"><tr><td><select name="sachverhaltF[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltF[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltF_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltF_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltF_target[0]"><tr><td><select name="sachverhaltF[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltF[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltF_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltF_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+
+
+<tr><td>Sachverhalt g.	</td></tr>
+
+<tr><td>Das Gehalt des Leiters der Vertriebsabteilung für 20X1 in Höhe von insgesamt
+
+38.000 GE wurde auf dessen privates Bankkonto überwiesen.</td></tr>
+
+<tr><td><table id="main_sachverhaltG"><tr><td><table><tr><td><table id="sachverhaltG">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltG_source[0]"><tr><td><select name="sachverhaltG[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltG[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltG_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltG_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltG_target[0]"><tr><td><select name="sachverhaltG[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltG[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltG_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltG_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+
+
+<tr><td>Sachverhalt h.	</td></tr>
+
+<tr><td>Es werden 60% der hergestellten Erzeugnisse am Ende des Geschäftsjahres zum Preis von 100.000 GE gegen Barzahlung verkauft.</td></tr>
+
+<tr><td><table id="main_sachverhaltH"><tr><td><table><tr><td><table id="sachverhaltH">
+<tr>
+<td>&nbsp;</td></tr>
+
+			<tr><td><table id="sachverhaltH_source[0]"><tr><td><select name="sachverhaltH[0][0][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltH[0][0][0][1]"></td></tr><tr><td>
+
+					<a id="sachverhaltH_0-sourceadd" class="blacklink" onclick="addNewSource(this);">Konto hinzufügen</a>
+
+					<span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltH_0-sourceclear" onclick="removeSource(this);">Konto entfernen</a>
+
+					</td></tr></table></td><td><table style="padding:20px;"><tr><td>an</td></tr>
+
+					<tr><td>&nbsp;</td></tr></table></td><td><table><tr><td><table id="sachverhaltH_target[0]"><tr><td><select name="sachverhaltH[0][1][0][0]"><option value="0">Bitte auswählen...</option><option value="abnutzbaresachanlagen">Abnutzbare Sachanlagen</option><option value="aufwandpersonal">Aufwand (Personal)</option><option value="aufwandsonst">Aufwand (Sonstiges)</option><option value="aufwandumsatz">Aufwand (Verkauf)</option><option value="aufwandzins">Aufwand (Zins)</option><option value="eigenkapitalentnahme">Entnahme</option><option value="ertragumsatz">Ertrag (Verkauf)</option><option value="fordverkauf">Forderung (Verkauf)</option><option value="handelsware">Handelsware</option><option value="nichtabnutzbaresachanlagen">Nicht abnutzbare Sachanlagen</option><option value="verbindlichkeitenbank">Verbindlichkeiten (Bank)</option><option value="verbindlichkeiteneinkauf">Verbindlichkeiten (Einkauf)</option><option value="verbindlichkeitensonst">Verbindlichkeiten (Sonstiges)</option><option value="zahlungsmittel">Zahlungsmittel</option></select></td><td><input type="text" name="sachverhaltH[0][1][0][1]"></td></tr><tr><td>
+
+					<a class="blacklink" id="sachverhaltH_0-targetadd" onclick="addNewTarget(this);">Konto hinzufügen</a><span>&nbsp;&nbsp;&nbsp;</span>
+
+					<a class="blacklink" id="sachverhaltH_0-targetclear" onclick="removeTarget(this);">Konto entfernen</a>
+
+					</td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr><tr><td><table><tr><td>
+
+					<a id="lala" class="blacklink" onClick="addNewBusatz(this);">Neuen Buchungssatz hinzufügen</a></td><td width="30">&nbsp;</td><td>
+
+					<a id="lala" class="blacklink" onClick="removeBusatz(this);">Letzten Buchungssatz entfernen</a></td></tr>
+
+					</table></td></tr></table></td></tr><tr>
+
+				<td style="padding-top:20px;padding-bottom:20px;" colspan="3"><hr></td></tr>	</td></tr>
+
+</table>
+
+
+
+				<input type="hidden" name="action" value="postSolution"/>
+
+				<input type="hidden" name="id" value="68"/>
+
+				<input type="hidden" name="pagerKey" value ="1eb95b920322733e760280dedd8f46349ba30547"/>
+
+				<p><div align="center">
+
+					<table>
+
+						<tr>
+
+							<td style="text-align:right;font-size:8pt;" class="status_text">Verbindung zum Server wird geprüft</td>
+
+							<td style="width:25px;text-align:right;">
+
+								<img class="status_icon status_icon1" style="display:inline" src="icons/action_unfinished.png" />
+
+								<img class="status_icon status_icon2" style="display:none" src="icons/action_failed.png" />
+
+								<img class="status_icon status_icon3" style="display:none" src="icons/action_ok.png" />
+
+								<img class="status_icon status_icon4" style="display:none" src="icons/block_solution.png" />
+
+							</td>
+
+							<td><input type="submit" disabled="disabled" id="send_solution" value="Lösung abschicken"/></td>
+
+						</tr>
+
+					</table>
+
+				</div>
+
+			</form>
+
+			</td>
+
+		</tr>
+
+	</table>			<script type="text/javascript">
+
+				window.addEvent('domready', function() {
+
+					var inputs = $('student_form').getElements('input, select, textarea');
+
+					inputs.addEvent('keydown',function(e){
+
+							if(e.key == 'enter'){
+
+									e.stop();
+
+							}
+
+					});
+
+										});
+
+			</script>
+
+
+
+	<br/>
+
+</div>
+		<script type="text/javascript">
+
+			var helpTips = new Tips('.thumb');
+
+		</script>
+
+		<div class="navSeperator"></div>
+
+		<div style="padding:15px;"><div id="stat"></div></div>	</body>
+
+</html>
+

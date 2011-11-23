@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "foo",
+    "num_pages": 1
+  },
+  {
+    "id": 2,
+    "title": "bar",
+    "num_pages": 2
+  },
+  {
+    "id": 3,
+    "title": "baz",
+    "num_pages": 2
+  }
+]
