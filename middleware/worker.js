@@ -37,10 +37,16 @@ var post = [
   audit
 ];
 
+require('./models');
+
 require('./api/attempt').setupRoutes(server, pre, post);
 require('./api/service').setupRoutes(server, pre, post);
 require('./api/test').setupRoutes(server, pre, post);
 require('./api/user').setupRoutes(server, pre, post);
+
+server.get(null, '/dummy', pre, function(req, res, next) {
+
+}, post);
 
 mongoose.connect('mongodb://localhost/etestmw');
 
