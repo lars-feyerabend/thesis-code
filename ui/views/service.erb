@@ -1,0 +1,33 @@
+<% if flash[:notice] %>
+<div class="alert-message block-message <%= flash[:notice][:class] %>">
+  <p>
+    <%= flash[:notice][:message] %>
+  </p>
+</div>
+<% end %>
+
+<p>
+  <a href="/service/create" class="btn success">Create new</a>
+</p>
+  
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @services.each do |service| %>
+  <tr>
+    <td><a href="/service/<%= service["_id"] %>"><%= service["_id"] %></a></td>
+    <td><%= service["title"] %></td>
+    <td>
+      <a href="/service/<%= service["_id"] %>/edit" class="btn">Edit</a>
+      <a href="/service/<%= service["_id"] %>/delete" class="btn danger confirm">Delete</a>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

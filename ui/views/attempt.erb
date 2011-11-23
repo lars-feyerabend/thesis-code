@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="span11">
+    some meta info here...
+  </div>
+  <div class="span3" style="text-align: right">
+    <a href="/attempt/<%= @attempt['_id'] %>/cancel" class="btn danger">Cancel attempt</a>
+  </div>
+</div>
+
+<form action="/attempt/<%= @attempt['_id'] %>/submit" method="post">
+<div id="service_content">
+  <%= content %>
+</div>
+
+<hr />
+<div class="row"><div class="span7">
+      <input type="submit" value="&laquo; Previous" class="btn" />
+    </div><div class="span7" style="text-align: right">
+      <input type="submit" value="Next &raquo;" class="btn primary" />
+    </div></div>
+</form>

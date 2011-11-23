@@ -1,0 +1,30 @@
+<form action="<%= @s ? '/service/'+@s['_id']+'/edit' : '/service/create' %>" method="post" accept-charset="utf-8">
+  <fieldset>
+    <div class="clearfix">
+      <label for="title">Title</label>
+      <div class="input">
+        <input name="title" id="title" value="<%= @s ? @s['title'] : '' %>" />
+      </div>
+    </div>
+    
+    <div class="clearfix">
+      <label for="url">URL</label>
+      <div class="input">
+        <input name="url" id="url" value="<%= @s ? @s['url'] : '' %>" />
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="clearfix">
+      <label for="extra_js">Extra JS</label>
+      <div class="input">
+        <textarea name="extra_js" id="extra_js"><%= @s ? @s['extra_js'] : '' %></textarea>
+      </div>
+  </fieldset>
+  
+  <div class="actions">
+    <input type="submit" name="commit" value="Save" class="btn primary" />
+    <a href="/service" class="btn">Cancel</a>
+  </div>
+</form>

@@ -1,0 +1,15 @@
+<form action="<%= @t ? '/test/'+@t['_id']+'/edit' : '/test/create' %>" method="post" accept-charset="utf-8">
+  <fieldset>
+    <div class="clearfix">
+      <label for="title">Title</label>
+      <div class="input">
+        <input name="title" id="title" value="<%= @t ? @t['title'] : '' %>" />
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <input type="submit" name="commit" value="Save" class="btn primary" />
+    <a href="/test" class="btn">Cancel</a>
+  </div>
+</form>
