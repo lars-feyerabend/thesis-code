@@ -17,6 +17,12 @@ module BSON
       "\"#{to_s}\""
     end
   end
+  
+  class DBRef
+    def to_s
+      object_id.to_s
+    end
+  end
 end
 
 module Middleware
@@ -36,9 +42,7 @@ module Middleware
       end
       
       def check_id!
-        p @params
         if @params.has_key?('id') and not BSON::ObjectId.legal?(@params['id'])
-          p "inside if"
           halt 500, '{"msg":"Invalid ID provided"}'
         end
       end

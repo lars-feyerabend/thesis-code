@@ -8,8 +8,52 @@
     </div>
   </fieldset>
 
+  <fieldset>
+    <legend>Content</legend>
+    <div class="clearfix">
+      <label for="title">Pages:</label>
+      <div class="input" id="pages_content">
+        <% if @t then %>
+        <% @t['content'].each do |x| %>
+        <div id="<%= "Z#{x['service']}_#{x['test']}_#{x['page']}" %>"><%= "#{x['service']}!#{x['test']}!#{x['page']}" %></div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <label for="title">Add new page:</label>
+      <div class="input">
+        
+        <select name="page_template" id="pagetpl">
+          <% @available.each do |s_id, s| %>
+          <% s['tests'].each do |t| %>
+          <% for p in 1..(t['nb_pages'].to_i) %>
+          <option value="<%= "#{s_id}!#{t['id']}!#{p}" %>"><%= s['title'] %> / <%= t['title'] %> / <%= p %></option>
+          <% end %>
+          <% end %>
+          <% end %>
+        </select>
+        <button id="pagetpl_add" class="btn">Add</button>
+      </div>
+    </div>
+  </fieldset>
+
   <div class="actions">
     <input type="submit" name="commit" value="Save" class="btn primary" />
     <a href="/test" class="btn">Cancel</a>
   </div>
 </form>
+
+<script>
+  $(function(){
+    $('#pagetpl').change(function(){
+      //if (this.find(':selected'))
+    });
+    
+    $('#pagetpl_add').click(function(e) {
+      e.preventDefault();
+      s = $('#pagetpl :selected');
+      $('#pages_content').append('<div id="Z'+s.val().replace(/!/g, '_')+'">'+s.text()+'</div>');
+    });
+  });
+</script>

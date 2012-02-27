@@ -1,14 +1,15 @@
 require 'sinatra'
-require 'rack-flash'
+require 'sinatra/flash'
 require 'json'
-require './myrestclient' # my own non-follow-3xx-instance 
+require '../myrestclient' # my own non-follow-3xx-instance 
 
 require 'open-uri'
 
 enable :sessions
-use Rack::Flash
 
-this_url = "http://localhost:4567"
+
+this_url = "http://localhost:3000"
+
 mw = RestClient::Resource.new(
     "http://localhost:9393",
     # :verify_ssl => OpenSSL::SSL::VERIFY_NONE,
@@ -29,6 +30,28 @@ get '/' do
   @title = "Welcome"
   erb :home
 end
+
+get '/service/:sid/items' do
+  # ...
+end
+
+get '/service/:sid/item/:id' do
+  # ...
+end
+
+get '/service/:sid/item/:id/edit' do
+  # ...
+end
+
+post '/service/:sid/item/:id/edit' do
+  # ...
+end
+
+post '/service/:sid/items/create' do
+  #...
+end
+
+
 
 get '/test' do
   # json = URI.parse('https://localhost:3000/test').read
@@ -51,6 +74,7 @@ end
 
 get '/test/create' do
   @title = "Create New Test"
+  @available = JSON.parse(mw["test/available"].get.body)
   erb :test_form
 end
 
@@ -72,8 +96,10 @@ end
 get '/test/:id/edit' do
   response = mw["test/#{params[:id]}"].get
   @t = JSON.parse(response.body)
-  
   @title = "Edit test " + @t['title']
+  
+  @available = JSON.parse(mw["test/available"].get.body)
+  
   erb :test_form
 end
 
@@ -115,9 +141,9 @@ end
 get '/test/:id/attempt' do
   response = mw['attempt'].post({
     'test_id' => params[:id],
-    'asset_url'=>this_url + "/test/#{params[:id]}/asset/",
+    'asset_url'=>this_url + "/asset?service=%{service}&path=",
     'form_url'=>this_url + "/test/#{params[:id]}/form", 
-    'user_id' => 0    
+    'user_id' => '4f0f1c92ab1c042e9237cb7a' # hardcoded dummy user for now...
   })
 
   body = JSON.parse(response.body)
@@ -128,7 +154,7 @@ get '/test/:id/attempt' do
   when 403
     erb :attempt_error, :locals => { :error_msg => body['msg'] }
   else
-    erb :attempt_error, :locals => { :error_msg => 'An unknown error has occured.' }
+    erb :attempt_error, :locals => { :error_msg => 'An unknown error has occured: '+response.code.to_s  }
   end
 end
 
@@ -143,20 +169,32 @@ get '/attempt/:id' do
     erb :attempt_wait
   when "READY", "OPEN"
     if @attempt['cursor'] > 0
-      @title = @attempt['test'][0]['title']
+      @title = @attempt['test']['title']
     
       # ... fetch content ...
       content_req = mw["attempt/#{params[:id]}/page/#{@attempt['cursor']}"].get
-      q = JSON.parse(content_req.body)
+      #q = JSON.parse(content_req.body)
       
-      erb :attempt, :locals => { :content => q['content'], :js => q['js'], :css => q['css'] }
+      erb :attempt, :locals => { :content => content_req.body }
     else 
-      status_code 500
+      status 500
     end
   when "CLOSED"
     erb :attempt_error, :locals => { :error_msg => 'Attempt is already closed.' }
   else
     erb :attempt_error, :locals => { :error_msg => 'Illegal attempt state encountered.' }
+  end
+end
+
+get '/attempt/:id/goto/:cursor' do
+  response = mw["attempt/#{params[:id]}"].put({
+    :cursor => @params[:cursor]
+  })
+  
+  if (response.code == 200) 
+    redirect "/attempt/#{params[:id]}"
+  else
+    p response
   end
 end
 
@@ -181,23 +219,30 @@ get '/attempt/:id/cancel' do
   end
 end
 
-get '/test/:id/asset/*' do
+post '/attempt/:id/submit' do
+  id = @params.delete('id')
+  page = @params.delete('z__page')
+  
+  @params.delete('splat')
+  @params.delete('captures')
+  
+  response = mw["/attempt/#{id}/page/#{page}"].put(@params)
+  
+  redirect "/attempt/#{id}"
+end
+
+get '/asset' do
   begin
-    remote_resource = open(mw_url("/test/#{params[:id]}/asset/#{params[:splat].first}"))
-    if (remote_resource.status[0] == 404) then
-      status_code 404
-      return "File not found."
-    end
-    remote_resource.read
+    open(mw_url("/service/#{params[:service]}/asset/#{params[:path]}")).read
   rescue Errno::ECONNREFUSED
-    status_code 504
+    status 504
     "Gateway Timeout"
   end
 end
 
 
 get '/service' do
-  json = open(mw_url("/service"), :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE).read
+  json = open(mw_url("/service")).read
 
   @title = "Services"
   @services = JSON.parse(json)
@@ -210,17 +255,7 @@ get '/service/create' do
 end
 
 post '/service/create' do
-  require "net/http"
-
-  http = Net::HTTP.new("localhost", 3000)
-  http.use_ssl = true
-  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  
-  
-  request = Net::HTTP::Post.new("/service")
-  request.set_form_data(@params)
-  response = http.request(request)
-                                  
+  response = mw["/service"].post(@params)
   @service = JSON.parse(response.body)
   
   flash[:notice] = {
@@ -283,3 +318,12 @@ get '/service/:id' do
   erb :service_show
 end
 
+get '/service/:id/tests' do
+  @s = JSON.parse(mw["service/#{params[:id]}"].get.body)
+
+  response = mw["service/#{params[:id]}/test"].get
+  @tests = JSON.parse(response.body)
+  
+  @title = "Tests for Service " + @s['title']
+  erb :service_tests
+end

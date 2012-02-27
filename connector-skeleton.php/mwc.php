@@ -13,10 +13,12 @@
 require_once __DIR__.'/silex.phar'; 
 $app = new Silex\Application(); 
 
+$app['debug'] = true;
+
 # `before` – This will get called before processing the request, so it's a good
 # place for database setup etc.
-$app->before(function() {
-  $app['db'] = new PDO('mysql:dbname=mydb');
+$app->before(function() use ($DB) {
+  $app['db'] = $DB;
 });
 
 

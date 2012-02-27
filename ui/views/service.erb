@@ -13,7 +13,6 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Title</th>
       <th>Actions</th>
     </tr>
@@ -21,9 +20,10 @@
   <tbody>
     <% @services.each do |service| %>
   <tr>
-    <td><a href="/service/<%= service["_id"] %>"><%= service["_id"] %></a></td>
-    <td><%= service["title"] %></td>
+    <td><a href="/service/<%= service["_id"] %>"><%= service["title"] %></a></td>
     <td>
+      <a href="/service/<%= service["_id"] %>/items" class="btn success">Items</a>
+      <a href="/service/<%= service["_id"] %>/tests" class="btn success">Tests</a>
       <a href="/service/<%= service["_id"] %>/edit" class="btn">Edit</a>
       <a href="/service/<%= service["_id"] %>/delete" class="btn danger confirm">Delete</a>
     </td>

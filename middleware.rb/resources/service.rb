@@ -1,15 +1,17 @@
+require '../myrestclient'
+
 module Middleware
 
   class Application < Sinatra::Base
     
     get '/service' do
-      json db['tests'].find.to_a
+      json db['services'].find.to_a
     end
     
     post '/service' do
       id = db['services'].insert(@params)
       
-      status_code 201
+      status 201
       headers \
         'Location' => '/service/' + id.to_s
       json({ '_id' => id.to_s })
@@ -38,13 +40,29 @@ module Middleware
       
     end
     
-    get '/test' do
-      json db['tests'].find.collect { |i|
-        i[:open_attempts] = db['attempts'].count :query => { :test_id => i['_id'], :state => { "$ne" => "CLOSED" } }
-        i
-      }.to_a
-    end
+    get '/service/:id/asset/*' do
+      check_id!
 
+      s = db['services'].find_one({'_id' => BSON::ObjectId(@params['id'])})
+      raise Sinatra::NotFound unless s
+
+      url = s['asset_base'] + "/" + params[:splat].join("")
+
+      #fetch and deliver data
+      open(url).read
+    end
+    
+    get '/service/:id/test' do
+      check_id!
+      
+      s = db['services'].find_one({:_id => BSON::ObjectId(params['id'])})
+      raise Sinatra::NotFound unless s
+      
+      response = RestClient.get s['url']+'/test'
+      
+      response.body
+    end
+    
   end
 
 end

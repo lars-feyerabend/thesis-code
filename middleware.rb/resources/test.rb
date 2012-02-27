@@ -12,10 +12,22 @@ module Middleware
     post '/test' do
       id = db['tests'].insert(@params)
       
-      status_code 201
+      status 201
       headers \
         'Location' => '/test/' + id.to_s
       json({ '_id' => id.to_s })
+    end
+
+    get '/test/available' do
+      a = {}
+      db['services'].find.each { |i| 
+        response = RestClient.get i['url']+'/test'
+        t = JSON::parse(response)
+        
+        a[i['_id']] = { :title => i['title'], tests: t }
+      }
+      
+      json a
     end
     
     get '/test/:id' do
@@ -36,6 +48,7 @@ module Middleware
       db['tests'].remove({'_id' => BSON::ObjectId(@params[:id])})
       "{}"
     end
+  
   
   end
 

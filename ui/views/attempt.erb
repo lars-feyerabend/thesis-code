@@ -1,21 +1,36 @@
 <div class="row">
-  <div class="span11">
-    some meta info here...
+  <div class="span7">
+    <% if @attempt['cursor'] > 1 %>
+      <a class="btn primary" href="/attempt/<%= @attempt['_id'] %>/goto/<%= @attempt['cursor'] - 1 %>">&laquo; Previous</a>
+    <% end %>
+    <% for i in (1..(@attempt['test']['content'].length)) %>
+    <a class="btn" href="/attempt/<%= @attempt['_id'] %>/goto/<%= i %>"><%= i == @attempt['cursor'] ? "[#{i}]" : i %></a>
+    <% end %>
+    <% if (@attempt['cursor'] + 1) <= @attempt['test']['content'].length %>
+    <a class="btn primary" href="/attempt/<%= @attempt['_id'] %>/goto/<%= @attempt['cursor'] + 1 %>">Next &raquo;</a>
+    <% end %>
   </div>
-  <div class="span3" style="text-align: right">
+  <div class="span7" style="text-align: right">
     <a href="/attempt/<%= @attempt['_id'] %>/cancel" class="btn danger">Cancel attempt</a>
   </div>
 </div>
-
-<form action="/attempt/<%= @attempt['_id'] %>/submit" method="post">
-<div id="service_content">
-  <%= content %>
+<hr />
+<div class="row">
+  <div class="span14">
+    <%= @attempt['test']['content'][@attempt['cursor']-1]['intro'] %>
+  </div>
 </div>
 
 <hr />
-<div class="row"><div class="span7">
-      <input type="submit" value="&laquo; Previous" class="btn" />
-    </div><div class="span7" style="text-align: right">
-      <input type="submit" value="Next &raquo;" class="btn primary" />
-    </div></div>
+
+<div class="row">
+<div class="span14">
+<form action="/attempt/<%= @attempt['_id'] %>/submit" method="post">
+<input type="hidden" name="z__page" value="<%= @attempt['cursor'] %>" />
+<div id="service_content">
+  <%= content %>
+</div>
+<button type="submit" class="btn success">Submit Response</button>
 </form>
+</div>
+</div>

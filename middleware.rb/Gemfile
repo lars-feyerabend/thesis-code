@@ -1,5 +1,10 @@
 source :rubygems
 
+gem "thin"
+gem "shotgun"
+
+gem "mime-types"
+
 #gem "mongoid", "~> 2.3"
 gem "mongo"
 gem "bson_ext", "~> 1.4"

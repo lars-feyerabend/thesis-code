@@ -1,0 +1,31 @@
+<% if flash[:notice] %>
+<div class="alert-message block-message <%= flash[:notice][:class] %>">
+  <p>
+    <%= flash[:notice][:message] %>
+  </p>
+</div>
+<% end %>
+
+<p>
+  <a class="btn" href="/service">Back to list</a>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>#Items</th>
+      <th>#Pages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tests.each do |test| %>
+  <tr>
+    <td><%= test["id"] %></td>
+    <td><%= test["title"] %></td>
+    <td><%= test["nb_items"] %></td>
+    <td><%= test["nb_pages"] %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>

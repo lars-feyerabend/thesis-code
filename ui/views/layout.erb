@@ -2,13 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title><%= @title ? @title + ' | LMS Dummy' : 'LMS Dummy' %></title>
+  <title><%= @title ? @title + ' | UTX' : 'UTX' %></title>
   <link rel="stylesheet" href="/bootstrap.css">
+  <script src="/jquery.js"></script>
   <style type="text/css">
         /* Override some defaults */
         html, body {
           background-color: #eee;
         }
+        
+        .topbar .brand {font-weight: bold;}
         body {
           padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
         }
@@ -63,13 +66,12 @@
       <div class="topbar">
             <div class="fill">
               <div class="container">
-                <a class="brand" href="/">Dummy LMS</a>
+                <a class="brand" href="/">UTX</a>
                 
                 <ul class="nav">
                   <% links = { 
                     '/test' => 'Tests',
-                    '/report' => 'Reports',
-                    '/user' => 'Users',
+                    '/attempt' => 'Attempts',
                     '/service' => 'Services'
                   } 
                   links.each do |k,v| %>
