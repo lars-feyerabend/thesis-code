@@ -1,5 +1,22 @@
 require 'open-uri'
 
+  def shellescape(str)
+    # An empty argument will be skipped, so return empty quotes.
+    return "''" if str.empty?
+
+    str = str.dup
+
+    # Process as a single byte sequence because not all shell
+    # implementations are multibyte aware.
+    str.gsub!(/([^A-Za-z0-9_\-.,:\/@\n])/n, "\\\\\\1")
+
+    # A LF cannot be escaped with a backslash because a backslash + LF
+    # combo is regarded as line continuation and simply ignored.
+    str.gsub!(/\n/, "'\n'")
+
+    return str
+  end
+
 module Middleware
   
   class Application < Sinatra::Base
@@ -100,7 +117,7 @@ module Middleware
       
       asset_base = a['asset_url'] % { :service => service['_id'] }
       
-      o, s = Open3.capture2("./lib/assetize/assetize.js #{asset_base.shellescape}", :stdin_data=>r['content'])
+      o, s = Open3.capture2("./lib/assetize/assetize.js #{shellescape(asset_base)}", :stdin_data=>r['content'])
 
       #fetch and deliver data
       o
@@ -154,7 +171,7 @@ module Middleware
       response = RestClient.post(url, @params)
       
       # save status from response to database...
-      r = JSON.parse(response.body)
+      r = JSON.parse(response.body.gsub!("\xEF\xBB\xBF".force_encoding("UTF-8"), ''))
       
       
       

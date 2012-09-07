@@ -49,6 +49,7 @@ module Middleware
       url = s['asset_base'] + "/" + params[:splat].join("")
 
       #fetch and deliver data
+      p url
       open(url).read
     end
     
